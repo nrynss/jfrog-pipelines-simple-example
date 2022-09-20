@@ -12,6 +12,11 @@ resources:
       branches:
         # Specifies which branches will trigger dependent steps
         include: master
+      files:
+        include: dummy.+
+      buildOn:
+        commit: false
+        pullRequestCreate: true
 
   - name: myPropertyBag
     type: PropertyBag
@@ -40,6 +45,7 @@ pipelines:
             # So this will be empty during first run and will be set to prior run number in subsequent runs
             # Pipeline state documentation: https://www.jfrog.com/confluence/display/JFROG/Creating+Stateful+Pipelines#CreatingStatefulPipelines-PipelineState
             - echo "Previous run ID is $prev_runid"
+            - echo $res
 
       - name: p1_s2
         type: Bash
